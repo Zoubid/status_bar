@@ -1,0 +1,38 @@
+<openerp>
+	<data>
+		<record id="view_statusbar_form" model="ir.ui.view">
+			<field name="name">Statusbar view</field>
+
+			<field name="model">statusbar</field>
+
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button string ="set to start" type="object" name="startbar" attrs="{'invisible' : [('state','=','start')]}"/>
+						<button string ="set to progress" type="object" name="progressbar" attrs="{'invisible' : [('state','=','progress')]}"/>
+						<button string ="set to done" type="object" name="donebar" attrs="{'invisible' : [('state','=','done')]}"/>
+						<field name="state" widget="statusbar"/>
+					</header>
+					<group><field name="name"/></group>
+					
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="statusbar_example_action">
+			<field name="name">Create new record</field>
+			<field name="res_model">statusbar</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form,tree</field> 
+			<field name="view_id" ref="view_statusbar_form"/>
+		</record>
+		
+
+		<menuitem id="status_menu" name="Statusbar Test"/>
+		<menuitem id="the status" name="statusbar" parent="status_menu"/>
+		 <menuitem id="menu_detail_statusbar"
+				action="statusbar_example_action" parent="the status"
+				sequence="20"/>
+	</data>
+</openerp>
